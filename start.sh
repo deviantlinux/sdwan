@@ -45,5 +45,4 @@ if [ ! -f /client/$CN.csr ]
     then openssl req -new -key $CN.key -subj "/C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email" -out $CN.csr
 fi
 
-if [[ $MODE = server ]]
-    then 
+openvpn --config $MODE.conf

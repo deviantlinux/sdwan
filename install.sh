@@ -23,6 +23,21 @@ if [[ $MODE = client ]]; then
     echo 'comp-lzo' >> $MODE.conf 
     echo "verb 3" >> $MODE.conf 
   elif [[ $MODE = server ]]; then
-  echo "1" >> $MODE.conf 
-  echo "2" >> $MODE.conf
+  echo "port $SERVER_PORT" >> $MODE.conf 
+  echo "proto $PROTO" >> $MODE.conf
+  echo "dev tun" >> $MODE.conf
+  echo "ca ca.crt" >> $MODE.conf
+  echo "cert $SRVN.crt" >> $MODE.conf
+  echo "key $SRVN.key" >> $MODE.conf
+  echo "dh dh2048.pem" >> $MODE.conf
+  echo "server $TUNNEL_ADDR" >> $MODE.conf
+  echo "ifconfig-pool-persist ipp.txt" >> $MODE.conf
+  echo 'client-to-client' >> $MODE.conf
+  echo "keepalive 10 120" >> $MODE.conf
+  echo "cipher AES-256-CBC" >> $MODE.conf
+  echo 'comp-lzo' >> $MODE.conf
+  echo 'persist-key' >> $MODE.conf
+  echo 'persist-tun' >> $MODE.conf
+  echo "status openvpn-status.log" >> $MODE.conf
+  echo "verb 3" >> $MODE.conf
 fi

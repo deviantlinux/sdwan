@@ -5,7 +5,7 @@ echo "Please enter mode. Expected Values are server or client"
 read -r MODE_INPUT
 export MODE=$MODE_INPUT
 if [ -z $MODE ] ; then echo "OpenVPN mode not declared. Exiting" ; exit ; fi
-if [ $MODE = server ] ; then echo $MODE > $MODE.conf; elif [ $MODE = client ] ; then echo $MODE > $MODE.conf; else echo error $MODE is unexpected; exit; fi 
+if [ $MODE = server ] ; then echo #$MODE > $MODE.conf; elif [ $MODE = client ] ; then echo $MODE > $MODE.conf; else echo error $MODE is unexpected; exit; fi 
 if [ -z $CN ] ; then echo "Client name not decalred. Please check env.list"; exit ;fi
 if [[ $TUN_MODE != tun ]] ; then echo "Currently only tunnel mode is supported" ;fi
 if [[ $MODE = client ]]; then

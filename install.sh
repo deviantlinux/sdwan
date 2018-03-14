@@ -41,3 +41,4 @@ if [[ $MODE = client ]]; then
   echo "status openvpn-status.log" >> $MODE.conf
   echo "verb 3" >> $MODE.conf
 fi
+

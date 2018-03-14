@@ -22,7 +22,7 @@ if [[ $MODE = client ]]; then
     echo "cipher AES-256-CBC" >> $MODE.conf 
     echo 'comp-lzo' >> $MODE.conf 
     echo "verb 3" >> $MODE.conf 
-    elif [[ $MODE = server ]]; then
-    echo "1" >> $MODE.conf 
-    echo "2" >> $MODE.conf
+  elif [[ $MODE = server ]]; then
+  echo "1" >> $MODE.conf 
+  echo "2" >> $MODE.conf
 fi

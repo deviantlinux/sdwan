@@ -1,4 +1,5 @@
 FROM ubuntu
 RUN apt update ; apt install -y openvpn 
 WORKDIR /client
-ADD .
+ADD . /client
+CMD /client/start.sh

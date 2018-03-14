@@ -10,10 +10,8 @@ if [ -z $CN ] ; then echo "Client name not decalred. Please check env.list"; fi
 if [[ $TUN_MODE != tun ]] ; then echo "Currently only tunnel mode is supported" ;fi
 if [[ $MODE = client ]]; then
     echo "dev tun" >> $MODE.conf ;\
-    echo "proto $PROTO >> $MODE.conf ;\
-    echo "remote $SERVER_ADDRESS" $SERVER_PORT >> $MODE.conf ;\
-    echo "" >> $MODE.conf ;\
-    echo "" >> $MODE.conf ;\
+    echo "proto $PROTO" >> $MODE.conf ;\
+    echo "remote $SERVER_ADDRESS" $SERVER_PORT" >> $MODE.conf ;\
     echo "resolv-retry infinite" >> $MODE.conf ;\
     echo "nobind" >> $MODE.conf ;\
     echo "persist-key" >> $MODE.conf ;\
@@ -28,8 +26,3 @@ if [[ $MODE = client ]]; then
         'echo "1" >> $MODE.conf ;\
         echo "2" >> $MODE.conf'
 fi
-    
-    
-    
-    
-    

@@ -44,5 +44,9 @@ fi
 if [ ! -f /client/$CN.csr ]
     then openssl req -new -key $CN.key -subj "/C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email" -out $CN.csr
 fi
+# if $MODE = server ; then selfsign CSR. Generate cert DH <--- out of order can't think
+#
+# If $MODE = client ; then $CN.csr to $CA? to sign; while $incoming = empty, do sleep 60; if $incoming has signed cert 
+#  then download to WORK dir
 
 openvpn --config $MODE.conf

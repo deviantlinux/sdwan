@@ -1,9 +1,14 @@
 #!/bin/bash
 #
+export init="openvpn --config $MODE.conf"
+
 if [ -z $MODE ] ; then echo "OpenVPN mode not declared. Exiting" ; exit ; fi
 if [ $MODE = server ] ; then echo "#server" > $MODE.conf; elif [ $MODE = client ] ; then echo $MODE > $MODE.conf; else echo error $MODE is unexpected; exit; fi 
 if [ -z $CN ] ; then echo "Client name not decalred. Please check env.list"; exit ;fi
 if [[ $TUN_MODE != tun ]] ; then echo "Currently only tunnel mode is supported" ;fi
+if [ -f .configured ] then $init; fi
+
+#Generate .conf
 if [[ $MODE = client ]]; then
     echo "dev tun" >> $MODE.conf 
     echo "proto $PROTO" >> $MODE.conf
@@ -38,20 +43,28 @@ if [[ $MODE = client ]]; then
   echo "verb 3" >> $MODE.conf
 fi
 
-if [[ $MODE = client ]]; then
+#Generate openssl bits
+if [ ! -f $CN.key ] ; then
+    openssl genrsa -out $CN.key
+fi
+if [ ! -f $CN.csr ]; then
+    openssl req -new -key $CN.key -subj "/C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email" -out $CN.csr
+fi
 
-    if [ ! -f /client/$CN.key ]  
-        then openssl genrsa -out $CN.key
-    fi
+#--- Branch
+
+if [[ $MODE = client ]] ; then 
+    echo client
+    elif [[ $MODE = server ]] then
+    openssl req -new -x509 -key $CN.key -subj "/C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email" -out ca.crt
+    openssl dhparam -out dh2048.pem 
+    openssl x509 -req -in $CN.csr -CA ca.crt -CAkey $CN.key -CAcreateserial -out $CN.crt
     
-    if [ ! -f /client/$CN.csr ]
-        then openssl req -new -key $CN.key -subj "/C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email" -out $CN.csr
-    fi
-if
+    
+fi
 
-# if $MODE = server ; then selfsign CSR. Generate cert DH <--- out of order can't think
-#
-# If $MODE = client ; then $CN.csr to $CA? to sign; while $incoming = empty, do sleep 60; if $incoming has signed cert 
-#  then download to WORK dir
 
-openvpn --config $MODE.conf
+
+
+# if ready then touch .configured
+#openvpn --config $MODE.conf

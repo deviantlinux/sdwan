@@ -67,4 +67,4 @@ fi
 
 
 # if ready then touch .configured
-#openvpn --config $MODE.conf
+# openvpn --config $MODE.conf

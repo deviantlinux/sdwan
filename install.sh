@@ -5,7 +5,7 @@ echo "Please enter mode. Expected Values are server or client"
 read -r MODE_INPUT
 export MODE=$MODE_INPUT
 
-if [[ -z $MODE ]] then 
+if [ -z $MODE ]; then 
 echo " Mode not declared. exiting!" ; exit
 elif [[ $MODE = client ]] ; then
 echo "place holder for client"

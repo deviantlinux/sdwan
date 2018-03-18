@@ -5,7 +5,9 @@ echo "Please enter mode. Expected Values are server or client"
 read -r MODE_INPUT
 export MODE=$MODE_INPUT
 
-if [[ $MODE = client ]] ; then
+if [ -z $MODE ] then 
+echo echo " Mode not declared. exiting!"
+elif [[ $MODE = client ]] ; then
 echo "place holder for client"
 #docker run -d -e $MODE --env-file env.list --name sdwan deviantlinux/sdwan:latest
 # or

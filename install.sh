@@ -4,7 +4,6 @@ source env.list
 echo "Please enter mode. Expected Values are server or client"
 read -r MODE_INPUT
 export MODE=$MODE_INPUT
-
 if [ -z $MODE ]; then 
 echo " Mode not declared. exiting!" ; exit
 elif [[ $MODE = client ]] ; then
@@ -14,7 +13,6 @@ echo "place holder for client"
 # docker run --network=host --privileged -d --name ovpn deviantlinux/ovpnclient
 #not sure
 #Need the priv stuff. brain all over the palce at the moment
-
 elif [[ $MODE = server ]] ; then  
 echo "place holder for server"
 #docker run -d -e $MODE --env-file --name -- someother stuff specific to server conf

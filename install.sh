@@ -12,6 +12,9 @@ if [[ $MODE = client ]] ; then
 #not sure
 #Need the priv stuff. brain all over the palce at the moment
 
-else 
+elif [[ $MODE = server ]] ; then  
 docker run -d -e $MODE --env-file --name -- someother stuff specific to server conf
 #!Fuck sake
+
+else echo " $MODE is Garbage "; exit 
+fi

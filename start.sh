@@ -5,7 +5,7 @@ export init="openvpn --config $MODE.conf"
 if [ -z $MODE ] ; then echo "OpenVPN mode not declared. Exiting" ; exit ; fi
 if [ $MODE = server ] ; then echo "#server" > $MODE.conf; elif [ $MODE = client ] ; then echo $MODE > $MODE.conf; else echo error $MODE is unexpected; exit; fi 
 if [ -z $CN ] ; then echo "Client name not decalred. Please check env.list"; exit ;fi
-if [[ $TUN_MODE != tun ]] ; then echo "Currently only tunnel mode is supported" ;fi
+if [[ $TUN_MODE != tun ]] ; then echo "Currently only tunnel mode is supported" ; exit ;fi
 if [ -f .configured ] then $init; fi
 
 #Generate .conf
@@ -59,12 +59,7 @@ if [[ $MODE = client ]] ; then
     openssl req -new -x509 -key $CN.key -subj "/C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email" -out ca.crt
     openssl dhparam -out dh2048.pem 
     openssl x509 -req -in $CN.csr -CA ca.crt -CAkey $CN.key -CAcreateserial -out $CN.crt
-    
-    
 fi
-
-
-
 
 # if ready then touch .configured
 # openvpn --config $MODE.conf

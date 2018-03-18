@@ -6,6 +6,7 @@ read -r MODE_INPUT
 export MODE=$MODE_INPUT
 
 if [[ $MODE = client ]] ; then
+echo "place holder for client"
 #docker run -d -e $MODE --env-file env.list --name sdwan deviantlinux/sdwan:latest
 # or
 # docker run --network=host --privileged -d --name ovpn deviantlinux/ovpnclient
@@ -13,8 +14,7 @@ if [[ $MODE = client ]] ; then
 #Need the priv stuff. brain all over the palce at the moment
 
 elif [[ $MODE = server ]] ; then  
-docker run -d -e $MODE --env-file --name -- someother stuff specific to server conf
-#!Fuck sake
-
+echo "place holder for server"
+#docker run -d -e $MODE --env-file --name -- someother stuff specific to server conf
 else echo " $MODE is Garbage "; exit 
 fi

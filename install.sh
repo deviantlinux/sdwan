@@ -16,5 +16,5 @@ echo "place holder for client"
 elif [[ $MODE = server ]] ; then  
 echo "place holder for server"
 #docker run -d -e $MODE --env-file --name -- someother stuff specific to server conf
-else echo " $MODE is Garbage "; exit 
+else echo " $MODE is Garbage! exit status : PEBCAK"; exit 
 fi

@@ -7,7 +7,7 @@ if [ $MODE = server ] ; then echo "#server" > $MODE.conf; elif [ $MODE = client 
 
 if [ -z $CN ] ; then echo "Client Name Variable not declared. Exiting" ; exit ; fi
 
-if [ $TUN_MODE ! = tun ] ; then echo "Currently only tunnel mode is supported" ; exit ; fi
+if [ $TUN_MODE != tun ] ; then echo "Currently only tunnel mode is supported" ; exit ; fi
 if [ -f .configured ] ; then $init; fi
 
 #Generate .conf

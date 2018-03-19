@@ -6,7 +6,7 @@ if [ -z $MODE ] ; then echo "OpenVPN mode not declared. Exiting" ; exit ; fi
 if [ $MODE = server ] ; then echo "#server" > $MODE.conf; elif [ $MODE = client ] ; then echo $MODE > $MODE.conf; else echo error $MODE is unexpected; exit; fi 
 if [ -z $CN ] ; then echo "Client name not decalred. Please check env.list"; exit ;fi
 if [[ $TUN_MODE != tun ]] ; then echo "Currently only tunnel mode is supported" ; exit ;fi
-if [ -f .configured ] then $init; fi
+if [ -f .configured ] ; then $init; fi
 
 #Generate .conf
 if [[ $MODE = client ]]; then

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-export init="openvpn --config $MODE.conf"
+#export init="openvpn --config $MODE.conf"
 
 if [ -z $MODE ] ; then echo "OpenVPN mode not declared. Exiting" ; exit ; fi
 if [ $MODE = server ] ; then echo "#server" > $MODE.conf; elif [ $MODE = client ] ; then echo $MODE > $MODE.conf; else echo error $MODE is unexpected; exit; fi 

@@ -1,15 +1,12 @@
 #!/bin/bash
 #
-#export init="openvpn --config $MODE.conf"
+export init="openvpn --config $MODE.conf"
 
 if [ -z $MODE ] ; then echo "OpenVPN mode not declared. Exiting" ; exit ; fi
 if [ $MODE = server ] ; then echo "#server" > $MODE.conf; elif [ $MODE = client ] ; then echo $MODE > $MODE.conf; else echo error $MODE is unexpected; exit; fi 
-
 if [ -z $CN ] ; then echo "Client Name Variable not declared. Exiting" ; exit ; fi
-
 if [ $TUN_MODE != tun ] ; then echo "Currently only tunnel mode is supported" ; exit ; fi
 if [ -f .configured ] ; then $init; fi
-
 #Generate .conf
 if [[ $MODE = client ]]; then
     echo "dev tun" >> $MODE.conf 
@@ -44,7 +41,6 @@ if [[ $MODE = client ]]; then
   echo "status openvpn-status.log" >> $MODE.conf
   echo "verb 3" >> $MODE.conf
 fi
-
 #Generate openssl bits
 if [ ! -f $CN.key ] ; then
     openssl genrsa -out $CN.key
@@ -52,9 +48,7 @@ fi
 if [ ! -f $CN.csr ]; then
     openssl req -new -key $CN.key -subj /C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email -out $CN.csr
 fi
-
 #--- Branch
-
 if [[ $MODE = client ]] ; then 
     echo client
     elif [[ $MODE = server ]] ; then
@@ -62,6 +56,5 @@ if [[ $MODE = client ]] ; then
     openssl dhparam -out dh2048.pem 
     openssl x509 -req -in $CN.csr -CA ca.crt -CAkey $CN.key -CAcreateserial -out $CN.crt
 fi
-
 # if ready then touch .configured
 # openvpn --config $MODE.conf

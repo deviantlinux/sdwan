@@ -53,7 +53,7 @@ if [[ $MODE = client ]] ; then
     echo client
     elif [[ $MODE = server ]] ; then
     openssl req -new -x509 -key $CN.key -subj /C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email -out ca.crt
-    openssl dhparam -out dh2048.pem 
+    openssl dhparam -out dh2048.pem 2048
     openssl x509 -req -in $CN.csr -CA ca.crt -CAkey $CN.key -CAcreateserial -out $CN.crt
 fi
 # if ready then touch .configured

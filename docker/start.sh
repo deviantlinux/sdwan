@@ -56,5 +56,5 @@ if [[ $MODE = client ]] ; then
     openssl dhparam -out dh2048.pem 2048
     openssl x509 -req -in $CN.csr -CA ca.crt -CAkey $CN.key -CAcreateserial -out $CN.crt
 fi
-# if ready then touch .configured
-# openvpn --config $MODE.conf
+touch .configured
+openvpn --config $MODE.conf

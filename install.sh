@@ -8,13 +8,9 @@ if [ -z $MODE ]; then
 echo " Mode not declared. exiting!" ; exit
 elif [[ $MODE = client ]] ; then
 echo "place holder for client"
-#docker run -d -e $MODE --env-file env.list --name sdwan deviantlinux/sdwan:latest
-# or
-# docker run --network=host --privileged -d --name ovpn deviantlinux/ovpnclient
-#not sure
-#Need the priv stuff. brain all over the palce at the moment
+#docker run -d --priviledged -e $MODE --env-file env.list --name sdwan$MODE deviantlinux/sdwan:latest
 elif [[ $MODE = server ]] ; then  
 #echo "place holder for server"
-docker run -d -e $MODE --env-file env.list -p $SERVER_PORT:$SERVER_PORT --name sdwan deviantlinux/sdwan:latest
+docker run -i -e $MODE --env-file env.list -p $SERVER_PORT:$SERVER_PORT --name sdwan$MODE deviantlinux/sdwan:latest
 else echo " $MODE is Garbage! exit status : PEBCAK"; exit 
 fi

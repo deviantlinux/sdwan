@@ -14,7 +14,7 @@ echo "place holder for client"
 #not sure
 #Need the priv stuff. brain all over the palce at the moment
 elif [[ $MODE = server ]] ; then  
-echo "place holder for server"
-#docker run -d -e $MODE --env-file env.list -p $SERVER_PORT:SERVER_PORT --name sdwan  #someother stuff specific to server conf
+#echo "place holder for server"
+docker run -d -e $MODE --env-file env.list -p $SERVER_PORT:$SERVER_PORT --name sdwan deviantlinux/sdwan:latest
 else echo " $MODE is Garbage! exit status : PEBCAK"; exit 
 fi

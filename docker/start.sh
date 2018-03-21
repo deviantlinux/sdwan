@@ -30,7 +30,7 @@ if [[ $MODE = client ]]; then
   echo "cert $CN.crt" >> $MODE.conf
   echo "key $CN.key" >> $MODE.conf
   echo "dh dh2048.pem" >> $MODE.conf
-  echo "server $TUNNEL_ADDR" >> $MODE.conf
+  echo "server $TUNNEL_ADDR $TUNNEL_MASK" >> $MODE.conf
   echo "ifconfig-pool-persist ipp.txt" >> $MODE.conf
   echo 'client-to-client' >> $MODE.conf
   echo "keepalive 10 120" >> $MODE.conf

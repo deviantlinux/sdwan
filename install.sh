@@ -11,6 +11,10 @@ echo "place holder for client"
 #docker run -d --privileged -e $MODE --env-file env.list --name sdwan$MODE deviantlinux/sdwan:latest
 elif [[ $MODE = server ]] ; then  
 #echo "place holder for server"
-docker run -d --privileged -e MODE=$MODE --env-file env.list -p $SERVER_PORT:$SERVER_PORT/udp --name sdwan$MODE deviantlinux/sdwan:latest
+ 
+	#Inline testing command
+		docker run -i --rm --privileged -e MODE=$MODE --env-file env.list -p $SERVER_PORT:$SERVER_PORT/udp --name sdwan$MODE deviantlinux/sdwan:latest
+
+#docker run -d --privileged --restart always -e MODE=$MODE --env-file env.list -p $SERVER_PORT:$SERVER_PORT/udp --name sdwan$MODE deviantlinux/sdwan:latest
 else echo " $MODE is Garbage! exit status : PEBCAK"; exit 
 fi

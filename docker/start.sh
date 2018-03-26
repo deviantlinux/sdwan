@@ -50,7 +50,16 @@ if [ ! -f $CN.csr ]; then
 fi
 #--- Branch
 if [[ $MODE = client ]] ; then 
-    echo client
+#
+#	curl -X PUT -Ffile=$CN.csr http://$SERVER_ADDRESS:80/files/$CN.csr?token=$token
+	curl -X PUT -Ffile=@$CN.csr http://$SERVER_ADDRESS:80/files/$CN.csr?token=$token
+	sleep infinity
+#
+#	while [ curl method check = status 404] ; sleep 30 ; done
+#	// when status =200 ok do  [ curl method download $CN.key ] ; 
+#	then $init
+#
+#    echo client
     elif [[ $MODE = server ]] ; then
 	if [ ! -f ca.crt ] ; then openssl req -new -x509 -key $CN.key -subj /C=$C/ST=$ST/L=$L/O=$O/CN=$CN/emailAddress=$email -out ca.crt ; fi
     	if [ ! -f dh2048.pem ] ; then openssl dhparam -out dh2048.pem 2048 ; fi
